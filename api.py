@@ -10,7 +10,7 @@ app = FastAPI()
 API_KEY = "supply_2026"
 
 
-@app.get("/")
+@app.get("/forecast")
 def home():
     return {"message": "Demand Forecast API running"}
 
@@ -21,7 +21,7 @@ async def forecast(
     x_api_key: str = Header(None)
 ):
     # 🔒 API KEY VALIDATION
-    if x_api_key != API_KEY:
+    if not x_api_key or x_api_key != API_KEY:
         raise HTTPException(status_code=401, detail="Invalid API Key")
 
     # Read CSV
