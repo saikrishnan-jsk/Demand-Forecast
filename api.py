@@ -1,4 +1,5 @@
 from fastapi import FastAPI, UploadFile, File, Header, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
 import io
 
@@ -6,7 +7,15 @@ from run_pipeline import process_sku
 
 app = FastAPI()
 
-# 🔐 API KEY
+# ✅ ADD THIS EXACT BLOCK HERE
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],   # allow all frontend domains
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 API_KEY = "supply_2026"
 
 
