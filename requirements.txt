@@ -3,5 +3,4 @@ uvicorn
 pandas
 numpy
 statsmodels
-prophet
 python-multipart
