@@ -124,7 +124,7 @@ def process_sku(sku, group):
     else:
         days_left = 999
 
-    reorder_needed = stock < reorder_point
+    reorder_needed = bool(stock < reorder_point)
 
     # -----------------------------
     # REAL MAPE (Train/Test Split)
@@ -174,16 +174,16 @@ def process_sku(sku, group):
     # Final Output
     # -----------------------------
     return {
-        "sku_code": sku,
-        "model_used": model,
-        "avg_demand": round(avg_demand, 2),
-        "total_stock": stock,
-        "lead_time_days": lead_time,
-        "reorder_point": round(reorder_point, 2),
-        "days_left": days_left,
-        "reorder_needed": reorder_needed,
-        "mape": round(mape, 2) if mape else None,
-    }
+    "sku_code": str(sku),
+    "model_used": str(model),
+    "avg_demand": float(round(avg_demand, 2)),
+    "total_stock": int(stock),
+    "lead_time_days": int(lead_time),
+    "reorder_point": float(round(reorder_point, 2)),
+    "days_left": int(days_left),
+    "reorder_needed": bool(reorder_needed),
+    "mape": float(round(mape, 2)) if mape is not None else None,
+}
 
 
 # -----------------------------
